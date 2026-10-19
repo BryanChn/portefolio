@@ -25,3 +25,6 @@ dist-ssr
 
 # Claude Code (local)
 .claude/settings.local.json
+
+# Windows/WSL metadata
+*:Zone.Identifier
