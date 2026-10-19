@@ -1,1 +1,24 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: "Figtree", system-ui, sans-serif;
+
+  --color-base: #000000;
+  --color-surface: #121212;
+  --color-elevated: #1f1f1f;
+  --color-highlight: #2a2a2a;
+  --color-muted: #a7a7a7;
+  --color-accent: #8b5cf6;
+  --color-accent-light: #a78bfa;
+
+  --animate-eq: eq 0.9s ease-in-out infinite;
+
+  @keyframes eq {
+    0%, 100% { transform: scaleY(0.3); }
+    50% { transform: scaleY(1); }
+  }
+}
+
+body {
+  @apply bg-base text-white font-sans antialiased;
+}
