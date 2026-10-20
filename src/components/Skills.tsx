@@ -55,8 +55,7 @@ const skills: Skill[] = [
 function Skills() {
   const [active, setActive] = useState<'Tout' | Category>('Tout')
 
-  // Étape 2 — Filtre : recalculé à chaque rendu, donc à chaque clic sur une pastille.
-  // Pas besoin d'un second useState : visibleSkills se déduit de `active`.
+
   const visibleSkills =
     active === 'Tout' ? skills : skills.filter((skill) => skill.category === active)
 
@@ -68,7 +67,7 @@ function Skills() {
     <section id="skills" className="px-6 py-10">
       <h2 className="mb-4 text-2xl font-bold">Compétences</h2>
 
-      {/* Étape 3 — Pastilles : un bouton par filtre ; le clic met à jour `active` */}
+
       <div className="no-scrollbar mb-6 flex gap-2 overflow-x-auto">
         {(['Tout', ...categories] as const).map((cat) => (
           <button
@@ -76,16 +75,14 @@ function Skills() {
             type="button"
             onClick={() => setActive(cat)}
             aria-pressed={active === cat}
-            className={`shrink-0 rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
-              active === cat ? 'bg-white text-black' : 'bg-highlight text-white hover:bg-white/20'
-            }`}
+            className={`shrink-0 rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${active === cat ? 'bg-white text-black' : 'bg-highlight text-white hover:bg-white/20'
+              }`}
           >
             {cat} <span className="opacity-60">{countFor(cat)}</span>
           </button>
         ))}
       </div>
 
-      {/* Étape 4 — Cartes : seulement les compétences du filtre actif */}
       <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {visibleSkills.map(({ name, detail, icon: Icon, color }) => (
           <li
