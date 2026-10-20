@@ -22,3 +22,11 @@
 body {
   @apply bg-base text-white font-sans antialiased;
 }
+
+/* Masque la barre de défilement tout en gardant le scroll (carrousel) */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
