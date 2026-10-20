@@ -82,7 +82,7 @@ export const projects: Project[] = [
             Intégration au back-office pour consulter et suivre chaque demande,
             et envoi automatique d’un email de prise en compte au client.`,
         tech: ["PrestaShop", "PHP", "Smarty", "JavaScript"],
-        cover: "from-violet-700 to-indigo-400",
+        cover: "from-rose-500 to-purple-700",
     },
     {
         title: "Campagnes & Visuels",
