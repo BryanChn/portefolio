@@ -60,18 +60,18 @@ function About() {
             un code relu et fiable. Je cherche une équipe exigeante où
             être utile dès le premier jour.
           </p>
-          {/* Chiffres clés, façon « auditeurs mensuels » ; calculés depuis les données */}
+
           <dl className="mb-8 mt-6 flex flex-wrap gap-x-8 gap-y-3">
             {stats.map(({ value, label }) => (
               <div key={label}>
                 <dt className="sr-only">{label}</dt>
-                <dd className="font-display text-2xl font-bold">{value}</dd>
+                <dd className="text-2xl font-black">{value}</dd>
                 <dd className="text-sm text-muted">{label}</dd>
               </div>
             ))}
           </dl>
 
-          {/* mt-auto pousse le bouton en bas de la carte, quelle que soit sa hauteur */}
+
           <a
             href="https://github.com/BryanChn"
             target="_blank"

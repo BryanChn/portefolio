@@ -13,7 +13,7 @@ function Hero() {
       </div>
 
 
-      <h1 className="text-6xl font-black">Chaine Bryan</h1>
+      <h1 className="text-6xl font-black font">Chaine Bryan</h1>
       <p className="flex items-center gap-2 text-xl font-medium">
         <BadgeCheck
           size={24}
