@@ -1,4 +1,6 @@
-import { GraduationCap, MapPin, Music, Newspaper, Dumbbell } from 'lucide-react'
+import { ArrowUpRight, Dumbbell, GraduationCap, MapPin, Music, Newspaper } from 'lucide-react'
+import { SiGithub } from 'react-icons/si'
+import { projects } from '../data/projects'
 
 const experiences = [
   {
@@ -30,6 +32,12 @@ const interests = [
   { label: 'Musculation', icon: Dumbbell },
 ]
 
+const stats = [
+  { value: '~1 an', label: 'en agence e-commerce' },
+  { value: projects.filter((p) => p.kind === 'Module').length, label: 'modules PrestaShop' },
+  { value: projects.filter((p) => p.kind === 'Projet').length, label: 'projets réalisés' },
+]
+
 function About() {
   return (
     <section id="about" className="px-6 py-10">
@@ -37,7 +45,7 @@ function About() {
 
       <div className="grid gap-4 lg:grid-cols-[2fr_1fr]">
         {/* Carte bio, façon « À propos de l'artiste » */}
-        <article className="rounded-lg bg-elevated p-6 transition-colors hover:bg-highlight">
+        <article className="flex flex-col rounded-lg bg-elevated p-6">
           <p className="mb-4 flex items-center gap-2 text-sm text-muted">
             <MapPin size={16} />
             Mulhouse · Mobilité Colmar / Strasbourg
@@ -52,11 +60,31 @@ function About() {
             un code relu et fiable. Je cherche une équipe exigeante où
             être utile dès le premier jour.
           </p>
-          <p className="mt-4 leading-relaxed text-muted">
-            À l'aise en environnement Agile/Scrum, je m'intéresse à
-            l'utilisation de l'IA pour accélérer et fiabiliser le
-            développement.
-          </p>
+          {/* Chiffres clés, façon « auditeurs mensuels » ; calculés depuis les données */}
+          <dl className="mb-8 mt-6 flex flex-wrap gap-x-8 gap-y-3">
+            {stats.map(({ value, label }) => (
+              <div key={label}>
+                <dt className="sr-only">{label}</dt>
+                <dd className="font-display text-2xl font-bold">{value}</dd>
+                <dd className="text-sm text-muted">{label}</dd>
+              </div>
+            ))}
+          </dl>
+
+          {/* mt-auto pousse le bouton en bas de la carte, quelle que soit sa hauteur */}
+          <a
+            href="https://github.com/BryanChn"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group mt-auto flex w-fit items-center gap-3 rounded-full bg-white px-6 py-3 font-bold text-black transition-transform hover:scale-105"
+          >
+            <SiGithub size={22} />
+            Voir mon GitHub
+            <ArrowUpRight
+              size={20}
+              className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
+          </a>
         </article>
 
         <div className="flex flex-col gap-4">
