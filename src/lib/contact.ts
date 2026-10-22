@@ -1,18 +1,13 @@
-// Règles du formulaire de contact, partagées par le front (Contact.tsx)
-// et par l'API (api/contact.ts) : une seule source de vérité.
-
 export type FormValues = {
   name: string
   email: string
   message: string
 }
 
-// Un message d'erreur possible par champ (Partial = chaque clé est optionnelle)
 export type FormErrors = Partial<Record<keyof FormValues, string>>
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-// Renvoie un objet d'erreurs ; objet vide = formulaire valide
 export function validate(values: FormValues): FormErrors {
   const errors: FormErrors = {}
 

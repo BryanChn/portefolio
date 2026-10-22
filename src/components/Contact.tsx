@@ -6,17 +6,11 @@ type Status = 'idle' | 'loading' | 'success' | 'error'
 
 const emptyForm: FormValues = { name: '', email: '', message: '' }
 
-// Simulation d'envoi (remplacée plus tard par l'appel à /api/contact)
-function fakeSend(): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, 1200))
-}
-
 function Contact() {
   const [values, setValues] = useState<FormValues>(emptyForm)
   const [errors, setErrors] = useState<FormErrors>({})
   const [status, setStatus] = useState<Status>('idle')
 
-  // Un seul handler pour tous les champs, grâce à l'attribut name de chaque input
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setValues((prev) => ({ ...prev, [name]: value }))
@@ -31,8 +25,22 @@ function Contact() {
 
     setStatus('loading')
     try {
-      // TODO(human): remplace fakeSend() par l'appel à /api/contact (voir instructions)
-      await fakeSend()
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(values),
+      })
+
+      if (!response.ok) {
+        const data: { errors?: FormErrors } = await response.json().catch(() => ({}))
+        if (data.errors) {
+          setErrors(data.errors)
+          setStatus('idle')
+          return
+        }
+        throw new Error(`HTTP ${response.status}`)
+      }
+
       setStatus('success')
       setValues(emptyForm)
     } catch {

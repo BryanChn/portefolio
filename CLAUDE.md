@@ -16,6 +16,6 @@
 2. [x] Installer Tailwind (v4 + plugin @tailwindcss/vite, `@import "tailwindcss"` dans src/index.css)
 3. [x] Structure : layout façon Spotify (Sidebar, PlayerBar), sections Hero, À propos, Compétences (filtres), Projets (carrousel + fiche détaillée, données dans src/data/projects.ts). Contact = squelette
 4. [ ] Style + responsive (à faire après le formulaire et le déploiement)
-5. [ ] ← PROCHAINE ÉTAPE : Formulaire de contact : front (validation, états chargement/succès/erreur) puis API serverless
-6. [ ] Déploiement Vercel + repo GitHub propre
+5. [x] Formulaire de contact : front + API `api/contact.ts` (Resend), validation partagée dans `src/lib/contact.ts`. Dev local : `npx vercel dev` → http://localhost:3000 (pas `npm run dev`, sinon pas d'/api)
+6. [ ] ← PROCHAINE ÉTAPE : Déploiement Vercel (projet `portfolio` déjà créé et lié, variables d'env configurées ; reste à connecter le repo GitHub) + repo GitHub propre
 7. [ ] Bonus : repos GitHub dynamiques via l'API GitHub, animations (Framer Motion)
