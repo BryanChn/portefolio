@@ -30,3 +30,4 @@ dist-ssr
 *:Zone.Identifier
 .vercel
 .env*
+!.env.example
