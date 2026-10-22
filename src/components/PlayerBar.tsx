@@ -12,11 +12,11 @@ function PlayerBar() {
       </div>
 
       {/* Égaliseur animé : chaque barre a un délai différent */}
-      <div className="hidden sm:flex h-6 items-end gap-1" aria-hidden="true">
+      <div className="hidden h-6 items-end gap-1 sm:flex" aria-hidden="true">
         {[0, 0.2, 0.4, 0.1, 0.3].map((delay) => (
           <span
             key={delay}
-            className="w-1 h-full origin-bottom rounded-full bg-accent animate-eq"
+            className="h-full w-1 origin-bottom animate-eq rounded-full bg-accent"
             style={{ animationDelay: `${delay}s` }}
           />
         ))}

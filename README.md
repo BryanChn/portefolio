@@ -11,11 +11,11 @@ Portfolio one-page de développeur web & mobile, au design inspiré de l'interfa
 
 ## Stack
 
-| Côté | Technologies |
-|---|---|
-| Front | React 19, TypeScript, Vite, Tailwind CSS v4 |
-| Back | Fonction serverless Vercel (`api/contact.ts`), Resend pour l'envoi d'emails |
-| Déploiement | Vercel, déploiement continu depuis `main` |
+| Côté        | Technologies                                                                |
+| ----------- | --------------------------------------------------------------------------- |
+| Front       | React 19, TypeScript, Vite, Tailwind CSS v4                                 |
+| Back        | Fonction serverless Vercel (`api/contact.ts`), Resend pour l'envoi d'emails |
+| Déploiement | Vercel, déploiement continu depuis `main`                                   |
 
 La validation du formulaire (`src/lib/contact.ts`) est partagée entre le navigateur et la fonction serverless : les mêmes règles s'appliquent des deux côtés.
 

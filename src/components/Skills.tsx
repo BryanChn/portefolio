@@ -19,7 +19,6 @@ import {
   SiWordpress,
 } from 'react-icons/si'
 
-
 type Category = 'Langages' | 'Frameworks' | 'E-commerce' | 'IA' | 'Outils'
 
 type Skill = {
@@ -33,28 +32,129 @@ type Skill = {
 const categories: Category[] = ['Langages', 'Frameworks', 'E-commerce', 'IA', 'Outils']
 
 const skills: Skill[] = [
-  { name: 'React', detail: 'SPA et PWA hors-ligne', category: 'Frameworks', icon: SiReact, color: '#61DAFB' },
-  { name: 'PHP', detail: 'Back-end, module sur mesure sur prestashop', category: 'Langages', icon: SiPhp, color: '#777BB4' },
-  { name: 'JavaScript', detail: 'ES6+, front et back', category: 'Langages', icon: SiJavascript, color: '#F7DF1E' },
-  { name: 'HTML5', detail: 'Intégration sémantique', category: 'Langages', icon: SiHtml5, color: '#E34F26' },
-  { name: 'CSS3', detail: 'Intégration responsive', category: 'Langages', icon: SiCss, color: '#1572B6' },
-  { name: 'Sass', detail: 'Styles structurés et réutilisables', category: 'Langages', icon: SiSass, color: '#CC6699' },
-  { name: 'Java', detail: 'Programmation orientée objet', category: 'Langages', icon: FaJava, color: '#F89820' },
-  { name: 'Next.js', detail: 'React full-stack', category: 'Frameworks', icon: SiNextdotjs, color: '#FFFFFF' },
-  { name: 'React Native', detail: 'Applications mobiles', category: 'Frameworks', icon: SiReact, color: '#61DAFB' },
-  { name: 'Symfony', detail: 'Framework PHP', category: 'Frameworks', icon: SiSymfony, color: '#FFFFFF' },
-  { name: 'Ionic', detail: 'Applications mobiles hybrides', category: 'Frameworks', icon: SiIonic, color: '#3880FF' },
-  { name: 'NestJS', detail: 'API Node.js', category: 'Frameworks', icon: SiNestjs, color: '#E0234E' },
-  { name: 'PrestaShop', detail: 'Modules sur mesure 1.7 / 8.2 · Twig, Smarty', category: 'E-commerce', icon: SiPrestashop, color: '#DF0067' },
-  { name: 'WordPress', detail: 'CMS, one page', category: 'E-commerce', icon: SiWordpress, color: '#21759B' },
-  { name: 'Claude', detail: 'Développement assisté par IA', category: 'IA', icon: SiClaude, color: '#D97757' },
-  { name: 'ChatGPT', detail: 'Recherche et prototypage, brainstorming', category: 'IA', icon: RiOpenaiFill, color: '#FFFFFF' },
-  { name: 'Git', detail: 'Versioning et travail en équipe', category: 'Outils', icon: SiGit, color: '#F05032' },
+  {
+    name: 'React',
+    detail: 'SPA et PWA hors-ligne',
+    category: 'Frameworks',
+    icon: SiReact,
+    color: '#61DAFB',
+  },
+  {
+    name: 'PHP',
+    detail: 'Back-end, module sur mesure sur prestashop',
+    category: 'Langages',
+    icon: SiPhp,
+    color: '#777BB4',
+  },
+  {
+    name: 'JavaScript',
+    detail: 'ES6+, front et back',
+    category: 'Langages',
+    icon: SiJavascript,
+    color: '#F7DF1E',
+  },
+  {
+    name: 'HTML5',
+    detail: 'Intégration sémantique',
+    category: 'Langages',
+    icon: SiHtml5,
+    color: '#E34F26',
+  },
+  {
+    name: 'CSS3',
+    detail: 'Intégration responsive',
+    category: 'Langages',
+    icon: SiCss,
+    color: '#1572B6',
+  },
+  {
+    name: 'Sass',
+    detail: 'Styles structurés et réutilisables',
+    category: 'Langages',
+    icon: SiSass,
+    color: '#CC6699',
+  },
+  {
+    name: 'Java',
+    detail: 'Programmation orientée objet',
+    category: 'Langages',
+    icon: FaJava,
+    color: '#F89820',
+  },
+  {
+    name: 'Next.js',
+    detail: 'React full-stack',
+    category: 'Frameworks',
+    icon: SiNextdotjs,
+    color: '#FFFFFF',
+  },
+  {
+    name: 'React Native',
+    detail: 'Applications mobiles',
+    category: 'Frameworks',
+    icon: SiReact,
+    color: '#61DAFB',
+  },
+  {
+    name: 'Symfony',
+    detail: 'Framework PHP',
+    category: 'Frameworks',
+    icon: SiSymfony,
+    color: '#FFFFFF',
+  },
+  {
+    name: 'Ionic',
+    detail: 'Applications mobiles hybrides',
+    category: 'Frameworks',
+    icon: SiIonic,
+    color: '#3880FF',
+  },
+  {
+    name: 'NestJS',
+    detail: 'API Node.js',
+    category: 'Frameworks',
+    icon: SiNestjs,
+    color: '#E0234E',
+  },
+  {
+    name: 'PrestaShop',
+    detail: 'Modules sur mesure 1.7 / 8.2 · Twig, Smarty',
+    category: 'E-commerce',
+    icon: SiPrestashop,
+    color: '#DF0067',
+  },
+  {
+    name: 'WordPress',
+    detail: 'CMS, one page',
+    category: 'E-commerce',
+    icon: SiWordpress,
+    color: '#21759B',
+  },
+  {
+    name: 'Claude',
+    detail: 'Développement assisté par IA',
+    category: 'IA',
+    icon: SiClaude,
+    color: '#D97757',
+  },
+  {
+    name: 'ChatGPT',
+    detail: 'Recherche et prototypage, brainstorming',
+    category: 'IA',
+    icon: RiOpenaiFill,
+    color: '#FFFFFF',
+  },
+  {
+    name: 'Git',
+    detail: 'Versioning et travail en équipe',
+    category: 'Outils',
+    icon: SiGit,
+    color: '#F05032',
+  },
 ]
 
 function Skills() {
   const [active, setActive] = useState<'Tout' | Category>('Tout')
-
 
   const visibleSkills =
     active === 'Tout' ? skills : skills.filter((skill) => skill.category === active)
@@ -67,16 +167,16 @@ function Skills() {
     <section id="skills" className="px-6 py-10">
       <h2 className="mb-4 text-2xl font-bold">Compétences</h2>
 
-
-      <div className="no-scrollbar mb-6 flex gap-2 overflow-x-auto">
+      <div className="mb-6 no-scrollbar flex gap-2 overflow-x-auto">
         {(['Tout', ...categories] as const).map((cat) => (
           <button
             key={cat}
             type="button"
             onClick={() => setActive(cat)}
             aria-pressed={active === cat}
-            className={`shrink-0 rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${active === cat ? 'bg-white text-black' : 'bg-highlight text-white hover:bg-white/20'
-              }`}
+            className={`shrink-0 rounded-full px-4 py-1.5 text-sm font-medium transition-colors ${
+              active === cat ? 'bg-white text-black' : 'bg-highlight text-white hover:bg-white/20'
+            }`}
           >
             {cat} <span className="opacity-60">{countFor(cat)}</span>
           </button>

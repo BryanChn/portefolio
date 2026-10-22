@@ -17,7 +17,7 @@ function ProjectCard({ project, onClick }: Props) {
         className={`relative mb-3 grid aspect-square place-items-center rounded-md bg-linear-to-br shadow-lg ${project.cover}`}
       >
         <span className="px-2 text-center text-2xl font-black tracking-tight">{project.title}</span>
-        <span className="absolute bottom-2 right-2 grid size-11 translate-y-2 place-items-center rounded-full bg-accent text-black opacity-0 shadow-xl transition-all group-hover:translate-y-0 group-hover:opacity-100">
+        <span className="absolute right-2 bottom-2 grid size-11 translate-y-2 place-items-center rounded-full bg-accent text-black opacity-0 shadow-xl transition-all group-hover:translate-y-0 group-hover:opacity-100">
           <Play size={20} fill="currentColor" />
         </span>
       </div>

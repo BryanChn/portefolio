@@ -5,7 +5,6 @@ import ProjectCard from './ProjectCard'
 import ProjectModal from './ProjectModal'
 
 function Projects() {
-
   const trackRef = useRef<HTMLDivElement>(null)
   const scroll = (direction: 1 | -1) => {
     trackRef.current?.scrollBy({
@@ -22,16 +21,29 @@ function Projects() {
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-2xl font-bold">Projets</h2>
         <div className="hidden gap-2 md:flex">
-          <button type="button" onClick={() => scroll(-1)} aria-label="Précédent" className="rounded-full bg-highlight p-1.5 hover:bg-white/20">
+          <button
+            type="button"
+            onClick={() => scroll(-1)}
+            aria-label="Précédent"
+            className="rounded-full bg-highlight p-1.5 hover:bg-white/20"
+          >
             <ChevronLeft size={20} />
           </button>
-          <button type="button" onClick={() => scroll(1)} aria-label="Suivant" className="rounded-full bg-highlight p-1.5 hover:bg-white/20">
+          <button
+            type="button"
+            onClick={() => scroll(1)}
+            aria-label="Suivant"
+            className="rounded-full bg-highlight p-1.5 hover:bg-white/20"
+          >
             <ChevronRight size={20} />
           </button>
         </div>
       </div>
 
-      <div ref={trackRef} className="no-scrollbar -mx-3 flex snap-x snap-mandatory gap-2 overflow-x-auto">
+      <div
+        ref={trackRef}
+        className="-mx-3 no-scrollbar flex snap-x snap-mandatory gap-2 overflow-x-auto"
+      >
         {projects.map((project) => (
           // 2. Au clic, la carte « remonte » son projet dans l'état du parent
           <ProjectCard key={project.title} project={project} onClick={() => setSelected(project)} />

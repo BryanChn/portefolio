@@ -12,7 +12,7 @@ function Sidebar() {
   return (
     <>
       {/* Desktop : colonne à gauche */}
-      <aside className="hidden md:flex w-64 shrink-0 flex-col gap-2 rounded-lg bg-surface p-4">
+      <aside className="hidden w-64 shrink-0 flex-col gap-2 rounded-lg bg-surface p-4 md:flex">
         <p className="px-3 pb-2 text-sm font-bold text-muted">Bibliothèque</p>
         {navItems.map(({ href, label, icon: Icon }) => (
           <a
@@ -27,9 +27,13 @@ function Sidebar() {
       </aside>
 
       {/* Mobile : barre d'onglets en bas */}
-      <nav className="md:hidden order-last flex justify-around bg-surface py-2">
+      <nav className="order-last flex justify-around bg-surface py-2 md:hidden">
         {navItems.map(({ href, label, icon: Icon }) => (
-          <a key={href} href={href} className="flex flex-col items-center gap-1 text-xs text-muted hover:text-white">
+          <a
+            key={href}
+            href={href}
+            className="flex flex-col items-center gap-1 text-xs text-muted hover:text-white"
+          >
             <Icon size={20} />
             {label}
           </a>

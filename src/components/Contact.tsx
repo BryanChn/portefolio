@@ -74,20 +74,49 @@ function Contact() {
       ) : (
         <form onSubmit={handleSubmit} noValidate className="flex max-w-xl flex-col gap-4">
           <div>
-            <label htmlFor="name" className="mb-1 block text-sm font-medium">Nom</label>
-            <input id="name" name="name" value={values.name} onChange={handleChange} placeholder="Votre nom" className={inputClass} />
+            <label htmlFor="name" className="mb-1 block text-sm font-medium">
+              Nom
+            </label>
+            <input
+              id="name"
+              name="name"
+              value={values.name}
+              onChange={handleChange}
+              placeholder="Votre nom"
+              className={inputClass}
+            />
             {errors.name && <p className="mt-1 text-sm text-red-400">{errors.name}</p>}
           </div>
 
           <div>
-            <label htmlFor="email" className="mb-1 block text-sm font-medium">Email</label>
-            <input id="email" name="email" type="email" value={values.email} onChange={handleChange} placeholder="vous@exemple.com" className={inputClass} />
+            <label htmlFor="email" className="mb-1 block text-sm font-medium">
+              Email
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              value={values.email}
+              onChange={handleChange}
+              placeholder="vous@exemple.com"
+              className={inputClass}
+            />
             {errors.email && <p className="mt-1 text-sm text-red-400">{errors.email}</p>}
           </div>
 
           <div>
-            <label htmlFor="message" className="mb-1 block text-sm font-medium">Message</label>
-            <textarea id="message" name="message" rows={5} value={values.message} onChange={handleChange} placeholder="Votre message…" className={`${inputClass} resize-y`} />
+            <label htmlFor="message" className="mb-1 block text-sm font-medium">
+              Message
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              rows={5}
+              value={values.message}
+              onChange={handleChange}
+              placeholder="Votre message…"
+              className={`${inputClass} resize-y`}
+            />
             {errors.message && <p className="mt-1 text-sm text-red-400">{errors.message}</p>}
           </div>
 
@@ -102,7 +131,11 @@ function Contact() {
             disabled={status === 'loading'}
             className="flex w-fit items-center gap-2 rounded-full bg-accent px-6 py-3 font-bold text-black transition hover:scale-105 hover:bg-accent-light disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100"
           >
-            {status === 'loading' ? <Loader2 size={18} className="animate-spin" /> : <Send size={18} />}
+            {status === 'loading' ? (
+              <Loader2 size={18} className="animate-spin" />
+            ) : (
+              <Send size={18} />
+            )}
             {status === 'loading' ? 'Envoi…' : 'Envoyer'}
           </button>
         </form>

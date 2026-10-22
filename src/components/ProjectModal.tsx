@@ -4,13 +4,12 @@ import { SiGithub } from 'react-icons/si'
 import type { Project } from '../data/projects'
 
 type Props = {
-  project: Project | null // 
+  project: Project | null //
   onClose: () => void
 }
 
 function ProjectModal({ project, onClose }: Props) {
   const dialogRef = useRef<HTMLDialogElement>(null)
-
 
   useEffect(() => {
     const dialog = dialogRef.current
@@ -60,12 +59,22 @@ function ProjectModal({ project, onClose }: Props) {
             {project.links && (
               <div className="flex gap-3">
                 {project.links.demo && (
-                  <a href={project.links.demo} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-full bg-accent px-5 py-2 font-bold text-black hover:bg-accent-light">
+                  <a
+                    href={project.links.demo}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 rounded-full bg-accent px-5 py-2 font-bold text-black hover:bg-accent-light"
+                  >
                     <ExternalLink size={18} /> Démo
                   </a>
                 )}
                 {project.links.github && (
-                  <a href={project.links.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 rounded-full border border-white/30 px-5 py-2 font-bold hover:border-white">
+                  <a
+                    href={project.links.github}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 rounded-full border border-white/30 px-5 py-2 font-bold hover:border-white"
+                  >
                     <SiGithub size={18} /> Code
                   </a>
                 )}
@@ -79,7 +88,7 @@ function ProjectModal({ project, onClose }: Props) {
         type="button"
         onClick={onClose}
         aria-label="Fermer"
-        className="absolute right-3 top-3 rounded-full bg-black/40 p-2 hover:bg-black/70"
+        className="absolute top-3 right-3 rounded-full bg-black/40 p-2 hover:bg-black/70"
       >
         <X size={20} />
       </button>
