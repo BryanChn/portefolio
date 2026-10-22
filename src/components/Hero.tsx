@@ -5,17 +5,30 @@ function Hero() {
   return (
     <section
       id="hero"
-      className="flex min-h-80 flex-col justify-end gap-2 bg-linear-to-b from-accent/70 to-surface px-6 pt-24 pb-8"
+      className="flex flex-col items-center gap-6 bg-linear-to-b from-accent/70 to-surface px-4 pt-10 pb-8 text-center sm:px-6 md:flex-row md:items-end md:pt-20 md:text-left"
     >
-      <div>
-        <img src={pix} alt="Moi" />
+      <div className="size-36 shrink-0 overflow-hidden rounded-full bg-linear-to-br from-accent-light to-accent shadow-2xl shadow-black/50 sm:size-44 lg:size-52">
+        <img
+          src={pix}
+          alt="Bryan Chaine"
+          width={324}
+          height={324}
+          className="size-full object-cover object-top"
+        />
       </div>
 
-      <h1 className="font text-6xl font-black">Chaine Bryan</h1>
-      <p className="flex items-center gap-2 text-xl font-medium">
-        <BadgeCheck size={24} className="fill-accent-light text-surface" />
-        Développeur web & mobile
-      </p>
+      <div className="min-w-0">
+        <p className="flex items-center justify-center gap-2 text-sm font-medium md:justify-start">
+          <BadgeCheck size={22} className="fill-accent-light text-surface" />
+          Développeur vérifié
+        </p>
+        <h1 className="mt-2 text-5xl font-black tracking-tight sm:text-6xl lg:text-8xl">
+          Chaine Bryan
+        </h1>
+        <p className="mt-3 text-lg font-medium text-white/80 sm:text-xl">
+          Développeur web & mobile
+        </p>
+      </div>
     </section>
   )
 }
