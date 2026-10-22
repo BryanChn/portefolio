@@ -3,6 +3,7 @@ import Contact from './components/Contact'
 import Hero from './components/Hero'
 import PlayerBar from './components/PlayerBar'
 import Projects from './components/Projects'
+import Reveal from './components/Reveal'
 import { MobileNav, Sidebar } from './components/Sidebar'
 import Skills from './components/Skills'
 import { sectionIds } from './data/navigation'
@@ -17,10 +18,18 @@ function App() {
         <Sidebar active={active} />
         <main className="flex-1 overflow-y-auto scroll-smooth bg-surface pb-6 md:rounded-lg">
           <Hero />
-          <About />
-          <Skills />
-          <Projects />
-          <Contact />
+          <Reveal>
+            <About />
+          </Reveal>
+          <Reveal>
+            <Skills />
+          </Reveal>
+          <Reveal>
+            <Projects />
+          </Reveal>
+          <Reveal>
+            <Contact />
+          </Reveal>
         </main>
       </div>
       <PlayerBar />

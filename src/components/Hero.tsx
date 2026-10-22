@@ -7,7 +7,7 @@ function Hero() {
       id="hero"
       className="flex flex-col items-center gap-6 bg-linear-to-b from-accent/70 to-surface px-4 pt-10 pb-8 text-center sm:px-6 md:flex-row md:items-end md:pt-20 md:text-left"
     >
-      <div className="size-36 shrink-0 overflow-hidden rounded-full bg-linear-to-br from-accent-light to-accent shadow-2xl shadow-black/50 sm:size-44 lg:size-52">
+      <div className="size-36 shrink-0 overflow-hidden rounded-full bg-linear-to-br from-accent-light to-accent shadow-2xl shadow-black/50 motion-safe:animate-fade-up sm:size-44 lg:size-52">
         <img
           src={pix}
           alt="Bryan Chaine"
@@ -17,7 +17,7 @@ function Hero() {
         />
       </div>
 
-      <div className="min-w-0">
+      <div className="min-w-0 [animation-delay:120ms] motion-safe:animate-fade-up">
         <p className="flex items-center justify-center gap-2 text-sm font-medium md:justify-start">
           <BadgeCheck size={22} className="fill-accent-light text-surface" />
           Développeur vérifié

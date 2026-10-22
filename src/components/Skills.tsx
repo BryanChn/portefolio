@@ -184,10 +184,11 @@ function Skills() {
       </div>
 
       <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {visibleSkills.map(({ name, detail, icon: Icon, color }) => (
+        {visibleSkills.map(({ name, detail, icon: Icon, color }, index) => (
           <li
             key={name}
-            className="group flex flex-col gap-3 rounded-lg bg-elevated p-4 transition-colors hover:bg-highlight"
+            style={{ animationDelay: `${index * 40}ms` }}
+            className="group flex flex-col gap-3 rounded-lg bg-elevated p-4 transition-colors hover:bg-highlight motion-safe:animate-fade-up"
           >
             <Icon
               size={40}
