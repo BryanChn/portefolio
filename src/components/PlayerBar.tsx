@@ -4,7 +4,7 @@ function PlayerBar() {
   return (
     <footer className="flex items-center justify-between gap-4 bg-base px-4 py-3">
       <div className="flex items-center gap-3">
-        <div className="size-12 rounded bg-gradient-to-br from-accent to-accent-light" />
+        <div className="size-12 rounded bg-linear-to-br from-accent to-accent-light" />
         <div>
           <p className="font-bold">Bryan Chaine</p>
           <p className="text-sm text-muted">En recherche de poste</p>

@@ -5,7 +5,7 @@ function Hero() {
   return (
     <section
       id="hero"
-      className="flex min-h-80 flex-col justify-end gap-2 bg-gradient-to-b from-accent/70 to-surface px-6 pb-8 pt-24"
+      className="flex min-h-80 flex-col justify-end gap-2 bg-linear-to-b from-accent/70 to-surface px-6 pb-8 pt-24"
     >
       <div>
 
