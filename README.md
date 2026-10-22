@@ -1,32 +1,39 @@
-# React + TypeScript + Vite
+# Portfolio — Bryan Chaine
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Portfolio one-page de développeur web & mobile, au design inspiré de l'interface de Spotify.
 
-Currently, two official plugins are available:
+## Fonctionnalités
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Layout façon application** : sidebar de navigation, zone principale défilante, barre de statut fixe (barre d'onglets sur mobile)
+- **Compétences** filtrables par catégorie (langages, frameworks, e-commerce, IA, outils)
+- **Projets et modules PrestaShop** présentés comme des albums, dans un carrousel, avec une fiche détaillée au clic
+- **Formulaire de contact** avec validation, états de chargement / succès / erreur, et envoi réel des emails
 
-## React Compiler
+## Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Côté | Technologies |
+|---|---|
+| Front | React 19, TypeScript, Vite, Tailwind CSS v4 |
+| Back | Fonction serverless Vercel (`api/contact.ts`), Resend pour l'envoi d'emails |
+| Déploiement | Vercel, déploiement continu depuis `main` |
 
-## Expanding the Oxlint configuration
+La validation du formulaire (`src/lib/contact.ts`) est partagée entre le navigateur et la fonction serverless : les mêmes règles s'appliquent des deux côtés.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## Lancer le projet en local
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install
+cp .env.example .env.local   # puis renseigner RESEND_API_KEY et CONTACT_TO_EMAIL
+npx vercel dev               # http://localhost:3000
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+`npx vercel dev` sert à la fois le site et la fonction `/api/contact` (`npm run dev` ne lance que le front).
+
+## Structure
+
+```
+api/contact.ts        Fonction serverless d'envoi d'email
+src/components/       Une section par composant (Hero, About, Skills, Projects, Contact…)
+src/data/projects.ts  Données des projets et modules
+src/lib/contact.ts    Types et validation du formulaire, partagés front / back
+```
