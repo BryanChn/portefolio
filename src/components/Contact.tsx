@@ -21,19 +21,22 @@ function validate(values: FormValues): FormErrors {
   const errors: FormErrors = {}
 
   if (values.name.trim() === '') {
-    errors.name = 'Indique ton nom.'
+    errors.name = 'Veuillez indiquer votre nom.'
   }
 
   if (values.email.trim() === '') {
-    errors.email = 'Indique ton email!'
-  } else if (!EMAIL_REGEX.test(values.email)) {
-    errors.email = 'Le format de l\'email n\'est pas accepté'
+    errors.email = 'Veuillez indiquer votre email.'
+  } else if (!EMAIL_REGEX.test(values.email.trim())) {
+    errors.email = "Le format de l'email n'est pas valide (exemple : nom@domaine.fr)."
   }
 
-  if (values.message.trim().length > 400) {
-    errors.message = 'Message trop long'
-  } else if (values.message.trim().length < 10) {
-    errors.message = 'Veuillez àjouter un message s\'il vous plait'
+  const messageLength = values.message.trim().length
+  if (messageLength === 0) {
+    errors.message = 'Veuillez écrire votre message.'
+  } else if (messageLength < 10) {
+    errors.message = `Votre message est trop court : 10 caractères minimum (${messageLength} actuellement).`
+  } else if (messageLength > 400) {
+    errors.message = `Votre message est trop long : 400 caractères maximum (${messageLength} actuellement).`
   }
 
   return errors
@@ -78,14 +81,14 @@ function Contact() {
   return (
     <section id="contact" className="px-6 py-10">
       <h2 className="mb-2 text-2xl font-bold">Contact</h2>
-      <p className="mb-6 text-muted">Un poste, un projet, une question ? Écris-moi.</p>
+      <p className="mb-6 text-muted">Un poste, un projet, une question ? Écrivez-moi.</p>
 
       {status === 'success' ? (
         <div className="flex max-w-xl items-center gap-3 rounded-lg bg-elevated p-6">
           <CheckCircle2 className="shrink-0 text-accent-light" size={28} />
           <div>
             <p className="font-bold">Message envoyé !</p>
-            <p className="text-sm text-muted">Je te réponds au plus vite.</p>
+            <p className="text-sm text-muted">Je vous réponds au plus vite.</p>
           </div>
           <button
             type="button"
@@ -99,25 +102,25 @@ function Contact() {
         <form onSubmit={handleSubmit} noValidate className="flex max-w-xl flex-col gap-4">
           <div>
             <label htmlFor="name" className="mb-1 block text-sm font-medium">Nom</label>
-            <input id="name" name="name" value={values.name} onChange={handleChange} placeholder="Ton nom" className={inputClass} />
+            <input id="name" name="name" value={values.name} onChange={handleChange} placeholder="Votre nom" className={inputClass} />
             {errors.name && <p className="mt-1 text-sm text-red-400">{errors.name}</p>}
           </div>
 
           <div>
             <label htmlFor="email" className="mb-1 block text-sm font-medium">Email</label>
-            <input id="email" name="email" type="email" value={values.email} onChange={handleChange} placeholder="toi@exemple.com" className={inputClass} />
+            <input id="email" name="email" type="email" value={values.email} onChange={handleChange} placeholder="vous@exemple.com" className={inputClass} />
             {errors.email && <p className="mt-1 text-sm text-red-400">{errors.email}</p>}
           </div>
 
           <div>
             <label htmlFor="message" className="mb-1 block text-sm font-medium">Message</label>
-            <textarea id="message" name="message" rows={5} value={values.message} onChange={handleChange} placeholder="Ton message…" className={`${inputClass} resize-y`} />
+            <textarea id="message" name="message" rows={5} value={values.message} onChange={handleChange} placeholder="Votre message…" className={`${inputClass} resize-y`} />
             {errors.message && <p className="mt-1 text-sm text-red-400">{errors.message}</p>}
           </div>
 
           {status === 'error' && (
             <p className="flex items-center gap-2 text-sm text-red-400">
-              <TriangleAlert size={16} /> L'envoi a échoué, réessaie dans un instant.
+              <TriangleAlert size={16} /> L'envoi a échoué, veuillez réessayer dans un instant.
             </p>
           )}
 
