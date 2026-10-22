@@ -52,7 +52,7 @@ function Contact() {
     'w-full rounded-md bg-highlight px-4 py-3 text-white placeholder:text-muted outline-none ring-accent transition focus:ring-2'
 
   return (
-    <section id="contact" className="px-6 py-10">
+    <section id="contact" className="px-4 py-8 sm:px-6 md:py-10">
       <h2 className="mb-2 text-2xl font-bold">Contact</h2>
       <p className="mb-6 text-muted">Un poste, un projet, une question ? Écrivez-moi.</p>
 

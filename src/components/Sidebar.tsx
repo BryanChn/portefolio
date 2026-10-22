@@ -1,46 +1,46 @@
-import { Disc3, Home, ListMusic, Mail, User } from 'lucide-react'
+import { navItems } from '../data/navigation'
 
-const navItems = [
-  { href: '#hero', label: 'Accueil', icon: Home },
-  { href: '#about', label: 'À propos', icon: User },
-  { href: '#skills', label: 'Compétences', icon: ListMusic },
-  { href: '#projects', label: 'Projets', icon: Disc3 },
-  { href: '#contact', label: 'Contact', icon: Mail },
-]
+type Props = {
+  active: string
+}
 
-function Sidebar() {
+export function Sidebar({ active }: Props) {
   return (
-    <>
-      {/* Desktop : colonne à gauche */}
-      <aside className="hidden w-64 shrink-0 flex-col gap-2 rounded-lg bg-surface p-4 md:flex">
-        <p className="px-3 pb-2 text-sm font-bold text-muted">Bibliothèque</p>
-        {navItems.map(({ href, label, icon: Icon }) => (
-          <a
-            key={href}
-            href={href}
-            className="flex items-center gap-4 rounded-md px-3 py-2 font-bold text-muted transition-colors hover:bg-highlight hover:text-white"
-          >
-            <Icon size={22} />
-            {label}
-          </a>
-        ))}
-      </aside>
-
-      {/* Mobile : barre d'onglets en bas */}
-      <nav className="order-last flex justify-around bg-surface py-2 md:hidden">
-        {navItems.map(({ href, label, icon: Icon }) => (
-          <a
-            key={href}
-            href={href}
-            className="flex flex-col items-center gap-1 text-xs text-muted hover:text-white"
-          >
-            <Icon size={20} />
-            {label}
-          </a>
-        ))}
-      </nav>
-    </>
+    <aside className="hidden w-64 shrink-0 flex-col gap-2 rounded-lg bg-surface p-4 md:flex">
+      <p className="px-3 pb-2 text-sm font-bold text-muted">Bibliothèque</p>
+      {navItems.map(({ id, label, icon: Icon }) => (
+        <a
+          key={id}
+          href={`#${id}`}
+          aria-current={active === id ? 'location' : undefined}
+          className={`flex items-center gap-4 rounded-md px-3 py-2 font-bold transition-colors hover:bg-highlight hover:text-white ${
+            active === id ? 'bg-highlight text-white' : 'text-muted'
+          }`}
+        >
+          <Icon size={22} className={active === id ? 'text-accent-light' : undefined} />
+          {label}
+        </a>
+      ))}
+    </aside>
   )
 }
 
-export default Sidebar
+export function MobileNav({ active }: Props) {
+  return (
+    <nav className="flex justify-around bg-base pt-1.5 pb-2 md:hidden">
+      {navItems.map(({ id, label, icon: Icon }) => (
+        <a
+          key={id}
+          href={`#${id}`}
+          aria-current={active === id ? 'location' : undefined}
+          className={`flex min-w-0 flex-1 flex-col items-center gap-1 px-1 text-[11px] transition-colors ${
+            active === id ? 'text-white' : 'text-muted'
+          }`}
+        >
+          <Icon size={22} className={active === id ? 'text-accent-light' : undefined} />
+          <span className="max-w-full truncate">{label}</span>
+        </a>
+      ))}
+    </nav>
+  )
+}

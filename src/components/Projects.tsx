@@ -17,7 +17,7 @@ function Projects() {
   const [selected, setSelected] = useState<Project | null>(null)
 
   return (
-    <section id="projects" className="px-6 py-10">
+    <section id="projects" className="px-4 py-8 sm:px-6 md:py-10">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-2xl font-bold">Projets</h2>
         <div className="hidden gap-2 md:flex">
