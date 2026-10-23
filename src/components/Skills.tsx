@@ -192,6 +192,7 @@ function Skills() {
             <Icon
               size={40}
               color={color}
+              aria-hidden="true"
               className="transition-transform duration-300 group-hover:scale-110"
             />
             <div>

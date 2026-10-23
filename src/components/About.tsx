@@ -73,7 +73,7 @@ function About() {
             rel="noopener noreferrer"
             className="group mt-auto flex w-fit items-center gap-3 rounded-full bg-white px-6 py-3 font-bold text-black transition-transform hover:scale-105"
           >
-            <SiGithub size={22} />
+            <SiGithub size={22} aria-hidden="true" />
             Voir mon GitHub
             <ArrowUpRight
               size={20}

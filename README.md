@@ -9,7 +9,8 @@ Portfolio one-page de développeur web & mobile, au design inspiré de l'interfa
 - **Layout façon application** : sidebar de navigation, zone principale défilante, barre de statut fixe (barre d'onglets sur mobile)
 - **Compétences** filtrables par catégorie (langages, frameworks, e-commerce, IA, outils)
 - **Projets et modules PrestaShop** présentés comme des albums, dans un carrousel, avec une fiche détaillée au clic
-- **Formulaire de contact** avec validation, états de chargement / succès / erreur, et envoi réel des emails
+- **Formulaire de contact** avec validation, états de chargement / succès / erreur, et envoi réel des emails, protégé contre le spam (captcha Cloudflare Turnstile, rate limit, champ piège)
+- **Sécurité et cache** : Content-Security-Policy et en-têtes de sécurité, cache longue durée des assets (`vercel.json`)
 - **SEO** : HTML pré-rendu au build, balises Open Graph avec vignette, données structurées JSON-LD, `robots.txt`, `sitemap.xml` et `llms.txt`
 
 ## Stack
@@ -26,7 +27,7 @@ La validation du formulaire (`src/lib/contact.ts`) est partagée entre le naviga
 
 ```bash
 npm install
-cp .env.example .env.local   # puis renseigner RESEND_API_KEY et CONTACT_TO_EMAIL
+cp .env.example .env.local   # puis renseigner les clés Resend (et Turnstile, optionnel)
 npx vercel dev               # http://localhost:3000
 ```
 

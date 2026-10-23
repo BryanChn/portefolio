@@ -1,22 +1,97 @@
 import { Resend } from 'resend'
-import { validate, type FormValues } from '../src/lib/contact.js'
+import { HONEYPOT_FIELD, MAX_BODY_SIZE, validate, type FormValues } from '../src/lib/contact.js'
+
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000
+const RATE_LIMIT_MAX = 3
+const submissions = new Map<string, number[]>()
+
+function isRateLimited(ip: string): boolean {
+  const now = Date.now()
+  const recent = (submissions.get(ip) ?? []).filter((time) => now - time < RATE_LIMIT_WINDOW_MS)
+
+  if (submissions.size > 1000) {
+    for (const [key, times] of submissions) {
+      if (times.every((time) => now - time >= RATE_LIMIT_WINDOW_MS)) submissions.delete(key)
+    }
+  }
+
+  if (recent.length >= RATE_LIMIT_MAX) {
+    submissions.set(ip, recent)
+    return true
+  }
+
+  submissions.set(ip, [...recent, now])
+  return false
+}
+
+function clientIp(request: Request): string {
+  return (
+    request.headers.get('x-real-ip') ??
+    request.headers.get('x-forwarded-for')?.split(',')[0].trim() ??
+    'unknown'
+  )
+}
+
+async function isHuman(token: string, ip: string, secret: string): Promise<boolean> {
+  if (!token) return false
+
+  const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+    method: 'POST',
+    body: new URLSearchParams({ secret, response: token, remoteip: ip }),
+  })
+  if (!response.ok) return false
+
+  const result = (await response.json()) as { success?: boolean }
+  return result.success === true
+}
 
 export async function POST(request: Request): Promise<Response> {
-  let values: FormValues
+  const raw = await request.text()
+  if (raw.length > MAX_BODY_SIZE) {
+    return Response.json({ error: 'Requête trop volumineuse.' }, { status: 413 })
+  }
+
+  let body: Record<string, unknown>
   try {
-    const body = (await request.json()) as Partial<Record<keyof FormValues, unknown>> | null
-    values = {
-      name: String(body?.name ?? ''),
-      email: String(body?.email ?? ''),
-      message: String(body?.message ?? ''),
-    }
+    const parsed: unknown = JSON.parse(raw)
+    if (typeof parsed !== 'object' || parsed === null) throw new Error()
+    body = parsed as Record<string, unknown>
   } catch {
     return Response.json({ error: 'Requête invalide.' }, { status: 400 })
+  }
+
+  if (String(body[HONEYPOT_FIELD] ?? '') !== '') {
+    return Response.json({ ok: true })
+  }
+
+  const ip = clientIp(request)
+  if (isRateLimited(ip)) {
+    return Response.json(
+      { error: 'Trop de messages envoyés. Réessayez dans quelques minutes.' },
+      { status: 429, headers: { 'Retry-After': String(RATE_LIMIT_WINDOW_MS / 1000) } },
+    )
+  }
+
+  const values: FormValues = {
+    name: String(body.name ?? ''),
+    email: String(body.email ?? ''),
+    message: String(body.message ?? ''),
   }
 
   const errors = validate(values)
   if (Object.keys(errors).length > 0) {
     return Response.json({ errors }, { status: 400 })
+  }
+
+  const turnstileSecret = process.env.TURNSTILE_SECRET_KEY
+  if (turnstileSecret) {
+    const human = await isHuman(String(body.turnstileToken ?? ''), ip, turnstileSecret)
+    if (!human) {
+      return Response.json(
+        { error: 'La vérification anti-spam a échoué. Réessayez.' },
+        { status: 403 },
+      )
+    }
   }
 
   const apiKey = process.env.RESEND_API_KEY

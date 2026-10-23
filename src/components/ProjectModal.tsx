@@ -75,7 +75,7 @@ function ProjectModal({ project, onClose }: Props) {
                     rel="noreferrer"
                     className="flex items-center gap-2 rounded-full border border-white/30 px-5 py-2 font-bold hover:border-white"
                   >
-                    <SiGithub size={18} /> Code
+                    <SiGithub size={18} aria-hidden="true" /> Code
                   </a>
                 )}
               </div>

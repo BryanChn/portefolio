@@ -1,15 +1,30 @@
+import { Turnstile, type TurnstileInstance } from '@marsidev/react-turnstile'
 import { CheckCircle2, Loader2, Send, TriangleAlert } from 'lucide-react'
-import { useState, type ChangeEvent, type FormEvent } from 'react'
-import { validate, type FormErrors, type FormValues } from '../lib/contact'
+import { useRef, useState, type ChangeEvent, type FormEvent } from 'react'
+import {
+  EMAIL_MAX_LENGTH,
+  HONEYPOT_FIELD,
+  NAME_MAX_LENGTH,
+  validate,
+  type FormErrors,
+  type FormValues,
+} from '../lib/contact'
 
 type Status = 'idle' | 'loading' | 'success' | 'error'
 
 const emptyForm: FormValues = { name: '', email: '', message: '' }
+const DEFAULT_ERROR = "L'envoi a échoué, veuillez réessayer dans un instant."
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined
 
 function Contact() {
   const [values, setValues] = useState<FormValues>(emptyForm)
   const [errors, setErrors] = useState<FormErrors>({})
   const [status, setStatus] = useState<Status>('idle')
+  const [serverError, setServerError] = useState(DEFAULT_ERROR)
+  const [token, setToken] = useState('')
+  const turnstileRef = useRef<TurnstileInstance>(undefined)
+  const honeypotRef = useRef<HTMLInputElement>(null)
+  const waitingForCaptcha = Boolean(TURNSTILE_SITE_KEY) && token === ''
 
   const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
@@ -28,23 +43,35 @@ function Contact() {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(values),
+        body: JSON.stringify({
+          ...values,
+          [HONEYPOT_FIELD]: honeypotRef.current?.value ?? '',
+          turnstileToken: token,
+        }),
       })
 
       if (!response.ok) {
-        const data: { errors?: FormErrors } = await response.json().catch(() => ({}))
+        const data: { errors?: FormErrors; error?: string } = await response
+          .json()
+          .catch(() => ({}))
         if (data.errors) {
           setErrors(data.errors)
           setStatus('idle')
           return
         }
-        throw new Error(`HTTP ${response.status}`)
+        setServerError(data.error ?? DEFAULT_ERROR)
+        setStatus('error')
+        return
       }
 
       setStatus('success')
       setValues(emptyForm)
     } catch {
+      setServerError(DEFAULT_ERROR)
       setStatus('error')
+    } finally {
+      setToken('')
+      turnstileRef.current?.reset()
     }
   }
 
@@ -73,6 +100,19 @@ function Contact() {
         </div>
       ) : (
         <form onSubmit={handleSubmit} noValidate className="flex max-w-xl flex-col gap-4">
+          <div aria-hidden="true" className="absolute -left-[9999px] size-px overflow-hidden">
+            <label htmlFor={HONEYPOT_FIELD}>Ne pas remplir ce champ</label>
+            <input
+              ref={honeypotRef}
+              id={HONEYPOT_FIELD}
+              name={HONEYPOT_FIELD}
+              type="text"
+              tabIndex={-1}
+              autoComplete="off"
+              defaultValue=""
+            />
+          </div>
+
           <div>
             <label htmlFor="name" className="mb-1 block text-sm font-medium">
               Nom
@@ -80,6 +120,8 @@ function Contact() {
             <input
               id="name"
               name="name"
+              autoComplete="name"
+              maxLength={NAME_MAX_LENGTH}
               value={values.name}
               onChange={handleChange}
               placeholder="Votre nom"
@@ -96,6 +138,8 @@ function Contact() {
               id="email"
               name="email"
               type="email"
+              autoComplete="email"
+              maxLength={EMAIL_MAX_LENGTH}
               value={values.email}
               onChange={handleChange}
               placeholder="vous@exemple.com"
@@ -122,13 +166,24 @@ function Contact() {
 
           {status === 'error' && (
             <p className="flex items-center gap-2 text-sm text-red-400">
-              <TriangleAlert size={16} /> L'envoi a échoué, veuillez réessayer dans un instant.
+              <TriangleAlert size={16} /> {serverError}
             </p>
+          )}
+
+          {TURNSTILE_SITE_KEY && (
+            <Turnstile
+              ref={turnstileRef}
+              siteKey={TURNSTILE_SITE_KEY}
+              onSuccess={setToken}
+              onExpire={() => setToken('')}
+              onError={() => setToken('')}
+              options={{ theme: 'dark', language: 'fr', appearance: 'interaction-only' }}
+            />
           )}
 
           <button
             type="submit"
-            disabled={status === 'loading'}
+            disabled={status === 'loading' || waitingForCaptcha}
             className="flex w-fit items-center gap-2 rounded-full bg-accent px-6 py-3 font-bold text-black transition hover:scale-105 hover:bg-accent-light disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:scale-100"
           >
             {status === 'loading' ? (
@@ -136,7 +191,7 @@ function Contact() {
             ) : (
               <Send size={18} />
             )}
-            {status === 'loading' ? 'Envoi…' : 'Envoyer'}
+            {status === 'loading' ? 'Envoi…' : waitingForCaptcha ? 'Vérification…' : 'Envoyer'}
           </button>
         </form>
       )}
