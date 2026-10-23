@@ -4,6 +4,8 @@
 
 - Site : https://bryan-chaine.vercel.app/
 - GitHub : https://github.com/BryanChn
+- LinkedIn : https://www.linkedin.com/in/bryan-chaine
+- CV (PDF) : https://bryan-chaine.vercel.app/Chaine_Bryan_CV.pdf
 - Contact : formulaire sur https://bryan-chaine.vercel.app/#contact
 
 ## Stack
