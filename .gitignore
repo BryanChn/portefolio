@@ -23,8 +23,9 @@ dist-ssr
 *.sln
 *.sw?
 
-# Claude Code (local)
-.claude/settings.local.json
+# Local AI assistant files
+.claude/
+CLAUDE.md
 
 # Windows/WSL metadata
 *:Zone.Identifier
