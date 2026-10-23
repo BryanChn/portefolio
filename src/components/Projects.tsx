@@ -13,7 +13,6 @@ function Projects() {
     })
   }
 
-  // 1. État partagé : le projet ouvert dans la fiche, ou null si elle est fermée
   const [selected, setSelected] = useState<Project | null>(null)
 
   return (
@@ -45,12 +44,10 @@ function Projects() {
         className="-mx-3 no-scrollbar flex snap-x snap-mandatory gap-2 overflow-x-auto"
       >
         {projects.map((project) => (
-          // 2. Au clic, la carte « remonte » son projet dans l'état du parent
           <ProjectCard key={project.title} project={project} onClick={() => setSelected(project)} />
         ))}
       </div>
 
-      {/* 3. La fiche lit l'état ; onClose le remet à null (Échap, croix, clic sur le fond) */}
       <ProjectModal project={selected} onClose={() => setSelected(null)} />
     </section>
   )

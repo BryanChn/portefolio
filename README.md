@@ -10,12 +10,13 @@ Portfolio one-page de développeur web & mobile, au design inspiré de l'interfa
 - **Compétences** filtrables par catégorie (langages, frameworks, e-commerce, IA, outils)
 - **Projets et modules PrestaShop** présentés comme des albums, dans un carrousel, avec une fiche détaillée au clic
 - **Formulaire de contact** avec validation, états de chargement / succès / erreur, et envoi réel des emails
+- **SEO** : HTML pré-rendu au build, balises Open Graph avec vignette, données structurées JSON-LD, `robots.txt`, `sitemap.xml` et `llms.txt`
 
 ## Stack
 
 | Côté        | Technologies                                                                |
 | ----------- | --------------------------------------------------------------------------- |
-| Front       | React 19, TypeScript, Vite, Tailwind CSS v4                                 |
+| Front       | React 19, TypeScript, Vite, Tailwind CSS v4, pré-rendu au build             |
 | Back        | Fonction serverless Vercel (`api/contact.ts`), Resend pour l'envoi d'emails |
 | Déploiement | Vercel, déploiement continu depuis `main`                                   |
 
@@ -35,6 +36,9 @@ npx vercel dev               # http://localhost:3000
 
 ```
 api/contact.ts        Fonction serverless d'envoi d'email
+public/               robots.txt, sitemap.xml, llms.txt, vignette Open Graph
+scripts/prerender.js  Injecte le HTML pré-rendu dans dist/index.html
+src/entry-server.tsx  Rendu de l'application en HTML, utilisé au build
 src/components/       Une section par composant (Hero, About, Skills, Projects, Contact…)
 src/data/projects.ts  Données des projets et modules
 src/lib/contact.ts    Types et validation du formulaire, partagés front / back

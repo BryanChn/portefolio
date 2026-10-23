@@ -3,12 +3,12 @@ export type ProjectKind = 'Projet' | 'Module'
 export type Project = {
   title: string
   kind: ProjectKind
-  subtitle: string // ligne courte sous la pochette, ex. « React · PWA »
-  context: string // où / pour qui, ex. « Formation UHA 4.0 », « S2I Evolution »
-  summary: string // une phrase, affichée en haut de la fiche
-  description: string // le descriptif complet de la fiche
+  subtitle: string
+  context: string
+  summary: string
+  description: string
   tech: string[]
-  cover: string // classes Tailwind du dégradé, écrites en entier
+  cover: string
   links?: { github?: string; demo?: string }
 }
 
@@ -124,5 +124,4 @@ export const projects: Project[] = [
     tech: ['PrestaShop', 'PHP', 'Varnish', 'Cron'],
     cover: 'from-blue-700 to-sky-400',
   },
-  // Tes modules PrestaShop : même format, avec kind: 'Module'
 ]

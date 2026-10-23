@@ -159,7 +159,6 @@ function Skills() {
   const visibleSkills =
     active === 'Tout' ? skills : skills.filter((skill) => skill.category === active)
 
-  // Nombre de compétences par filtre, affiché dans chaque pastille
   const countFor = (cat: 'Tout' | Category) =>
     cat === 'Tout' ? skills.length : skills.filter((skill) => skill.category === cat).length
 

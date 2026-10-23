@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-sans: 'Figtree', system-ui, sans-serif;
+  --font-sans: 'Figtree Variable', system-ui, sans-serif;
 
   --color-base: #000000;
   --color-surface: #121212;
@@ -40,7 +40,6 @@ body {
   @apply bg-base font-sans text-white antialiased;
 }
 
-/* Masque la barre de défilement tout en gardant le scroll (carrousel) */
 @utility no-scrollbar {
   scrollbar-width: none;
   &::-webkit-scrollbar {

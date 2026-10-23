@@ -44,7 +44,6 @@ function About() {
       <h2 className="mb-6 text-2xl font-bold">À propos</h2>
 
       <div className="grid gap-4 lg:grid-cols-[2fr_1fr]">
-        {/* Carte bio, façon « À propos de l'artiste » */}
         <article className="flex flex-col rounded-lg bg-elevated p-6">
           <p className="mb-4 flex items-center gap-2 text-sm text-muted">
             <MapPin size={16} />
@@ -110,7 +109,6 @@ function About() {
         </div>
       </div>
 
-      {/* Parcours : frise chronologique */}
       <h3 className="mt-10 mb-4 text-xl font-bold">Parcours</h3>
       <ol className="border-l-2 border-highlight">
         {experiences.map((exp) => (

@@ -30,7 +30,9 @@ function Reveal({ children }: Props) {
     <div
       ref={ref}
       className={`transition duration-700 ease-out motion-reduce:transition-none ${
-        visible ? 'translate-y-0 opacity-100' : 'motion-safe:translate-y-6 motion-safe:opacity-0'
+        visible
+          ? 'translate-y-0 opacity-100'
+          : 'in-[.js]:motion-safe:translate-y-6 in-[.js]:motion-safe:opacity-0'
       }`}
     >
       {children}

@@ -4,7 +4,7 @@ import { SiGithub } from 'react-icons/si'
 import type { Project } from '../data/projects'
 
 type Props = {
-  project: Project | null //
+  project: Project | null
   onClose: () => void
 }
 

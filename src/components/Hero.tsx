@@ -1,5 +1,5 @@
 import { BadgeCheck } from 'lucide-react'
-import pix from '../assets/photo_portfolio_detouree_v4.png'
+import photo from '../assets/photo-bryan-chaine.webp'
 
 function Hero() {
   return (
@@ -9,8 +9,9 @@ function Hero() {
     >
       <div className="size-36 shrink-0 overflow-hidden rounded-full bg-linear-to-br from-accent-light to-accent shadow-2xl shadow-black/50 motion-safe:animate-fade-up sm:size-44 lg:size-52">
         <img
-          src={pix}
-          alt="Bryan Chaine"
+          src={photo}
+          alt="Portrait de Bryan Chaine"
+          fetchPriority="high"
           width={324}
           height={324}
           className="size-full object-cover object-top"
