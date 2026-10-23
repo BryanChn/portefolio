@@ -23,10 +23,10 @@ function ProjectModal({ project, onClose }: Props) {
       ref={dialogRef}
       onClose={onClose}
       onClick={(e) => e.target === e.currentTarget && onClose()}
-      className="m-auto w-[min(42rem,calc(100%-2rem))] overflow-hidden rounded-xl bg-surface p-0 text-white shadow-2xl backdrop:bg-black/70"
+      className="m-auto max-h-[calc(100dvh-2rem)] w-[min(42rem,calc(100%-2rem))] flex-col overflow-hidden rounded-xl bg-surface p-0 text-white shadow-2xl backdrop:bg-black/70 open:flex"
     >
       {project && (
-        <article>
+        <article className="min-h-0 overflow-y-auto overscroll-contain">
           <header className={`flex items-end gap-5 bg-linear-to-b p-6 ${project.cover}`}>
             <div
               className={`grid size-28 shrink-0 place-items-center rounded-md bg-linear-to-br text-xl font-black shadow-2xl sm:size-36 ${project.cover}`}
@@ -35,7 +35,7 @@ function ProjectModal({ project, onClose }: Props) {
             </div>
             <div className="min-w-0">
               <p className="text-sm font-medium">{project.kind}</p>
-              <h3 className="truncate text-3xl font-black sm:text-5xl">{project.title}</h3>
+              <h3 className="text-2xl font-black break-words sm:text-5xl">{project.title}</h3>
               <p className="mt-2 text-sm text-white/80">
                 {project.context} · {project.subtitle}
               </p>
