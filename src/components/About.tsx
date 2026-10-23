@@ -10,6 +10,7 @@ import {
 import { FaLinkedin } from 'react-icons/fa'
 import { SiGithub } from 'react-icons/si'
 import { projects } from '../data/projects'
+import CopyEmail from './CopyEmail'
 
 const experiences = [
   {
@@ -54,17 +55,30 @@ function About() {
 
       <div className="grid gap-4 lg:grid-cols-[2fr_1fr]">
         <article className="flex flex-col rounded-lg bg-elevated p-6">
-          <p className="mb-4 flex items-center gap-2 text-sm text-muted">
-            <MapPin size={16} />
-            Mulhouse · Mobilité Colmar / Strasbourg
-          </p>
-          <p className="text-lg leading-relaxed">
-            Développeur web & mobile, formé front et back. Près d’un an en agence e-commerce à
-            concevoir, maintenir et optimiser des modules PrestaShop sur mesure pour des clients
-            (Celine Opticien, Hellomoon). Je résous les problèmes techniques de bout en bout, je
-            travaille en Agile/Scrum et j’intègre l’IA à mon workflow pour livrer plus vite, avec un
-            code relu et fiable. Je cherche une équipe exigeante où être utile dès le premier jour.
-          </p>
+          <div className="mb-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted">
+            <p className="flex items-center gap-2">
+              <MapPin size={16} aria-hidden="true" />
+              Mulhouse · Mobilité Colmar / Strasbourg
+            </p>
+            <CopyEmail />
+          </div>
+          <div className="flex flex-col gap-4 text-base leading-relaxed sm:text-lg">
+            <p>
+              Avant d’écrire du code, j’ai été chef d’équipe à la centrale de Fessenheim. Là-bas, la
+              rigueur et le travail d’équipe n’étaient pas des options : je les ai gardés en passant
+              au développement.
+            </p>
+            <p>
+              Depuis, j’ai passé près d’un an en agence e-commerce à créer des modules PrestaShop
+              sur mesure pour des marques comme Celine Opticien et Hellomoon. Ce que j’aime :
+              comprendre un problème en entier, puis livrer quelque chose de propre qui tient en
+              production.
+            </p>
+            <p>
+              Aujourd’hui, je cherche une équipe où continuer à progresser et être utile dès le
+              premier jour.
+            </p>
+          </div>
 
           <dl className="mt-6 mb-8 flex flex-wrap gap-x-8 gap-y-3">
             {stats.map(({ value, label }) => (
