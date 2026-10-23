@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import About from './components/About'
 import Contact from './components/Contact'
 import Hero from './components/Hero'
@@ -10,13 +11,17 @@ import { sectionIds } from './data/navigation'
 import { useActiveSection } from './hooks/useActiveSection'
 
 function App() {
-  const active = useActiveSection(sectionIds)
+  const mainRef = useRef<HTMLElement>(null)
+  const active = useActiveSection(sectionIds, mainRef)
 
   return (
     <div className="flex h-dvh flex-col">
       <div className="flex min-h-0 flex-1 gap-2 md:p-2">
         <Sidebar active={active} />
-        <main className="flex-1 overflow-y-auto scroll-smooth bg-surface pb-6 md:rounded-lg">
+        <main
+          ref={mainRef}
+          className="flex-1 overflow-y-auto scroll-smooth bg-surface pb-6 md:rounded-lg"
+        >
           <Hero />
           <Reveal>
             <About />
