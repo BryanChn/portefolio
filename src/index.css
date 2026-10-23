@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-sans: 'Figtree Variable', system-ui, sans-serif;
+  --font-sans: 'Figtree Variable', 'Figtree Variable fallback', system-ui, sans-serif;
 
   --color-canvas: #000000;
   --color-surface: #121212;

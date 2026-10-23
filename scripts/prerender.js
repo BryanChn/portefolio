@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto'
-import { readFileSync, rmSync, writeFileSync } from 'node:fs'
+import { readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 
 const root = fileURLToPath(new URL('..', import.meta.url))
@@ -31,7 +31,17 @@ for (const [, content] of inlineScripts) {
   }
 }
 
-writeFileSync(indexPath, template.replace(placeholder, `<div id="root">${render()}</div>`))
+const mainFont = readdirSync(`${root}dist/assets`).find((file) =>
+  /^figtree-latin-wght-normal-.+\.woff2$/.test(file),
+)
+if (!mainFont) throw new Error('Prerender : police Figtree (latin) introuvable dans dist/assets')
+const fontPreload = `<link rel="preload" href="/assets/${mainFont}" as="font" type="font/woff2" crossorigin>`
+
+const html = template
+  .replace('</head>', `  ${fontPreload}\n  </head>`)
+  .replace(placeholder, `<div id="root">${render()}</div>`)
+
+writeFileSync(indexPath, html)
 rmSync(ssrDir, { recursive: true, force: true })
 
 console.log('Prerender : dist/index.html généré')
