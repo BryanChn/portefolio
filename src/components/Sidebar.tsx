@@ -27,7 +27,7 @@ export function Sidebar({ active }: Props) {
 
 export function MobileNav({ active }: Props) {
   return (
-    <nav className="flex justify-around bg-base pt-1.5 pb-2 md:hidden">
+    <nav className="flex justify-around bg-canvas pt-1.5 pb-2 md:hidden">
       {navItems.map(({ id, label, icon: Icon }) => (
         <a
           key={id}

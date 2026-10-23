@@ -3,7 +3,7 @@
 @theme {
   --font-sans: 'Figtree Variable', system-ui, sans-serif;
 
-  --color-base: #000000;
+  --color-canvas: #000000;
   --color-surface: #121212;
   --color-elevated: #1f1f1f;
   --color-highlight: #2a2a2a;
@@ -37,7 +37,7 @@
 }
 
 body {
-  @apply bg-base font-sans text-white antialiased;
+  @apply bg-canvas font-sans text-white antialiased;
 }
 
 @utility no-scrollbar {
